@@ -1,0 +1,51 @@
+.recipe {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f8f8f8;
+    box-shadow: 0 0 10px #ccc;
+    overflow: auto;
+}
+
+.recipe h2 {
+    margin-top: 0;
+    margin-bottom: 10px;
+}
+
+.recipe img {
+    margin-right: 30px;
+    float: left;
+    max-width: 50%;
+    max-height: 50%;
+    border-radius: 5px;
+    overflow: auto;
+}
+
+.recipe a {
+    outline: none;
+  }
+  
+  a:link {
+    color: #6900ff;
+  }
+  
+  a:visited {
+    color: #a5c300;
+  }
+  
+  a:focus {
+    text-decoration: none;
+    background: #bae498;
+  }
+  
+  a:hover {
+    text-decoration: none;
+    background: #cdfeaa;
+  }
+  
+  a:active {
+    background: #6900ff;
+    color: #cdfeaa;
+  }

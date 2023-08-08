@@ -25,10 +25,6 @@ export class RandomRecipeService {
     return ingredients;
   }
 
-  private parseImagePath(meal: any) {
-    return meal.strMealThumb.split('/').pop();
-  }
-
   private parseRecipe(meal: any) {
     return {
       id: meal.idMeal,
@@ -37,7 +33,7 @@ export class RandomRecipeService {
       area: meal.strArea,
       instructions: meal.strInstructions,
       ingredients: this.parseIngredients(meal),
-      imagePath: this.parseImagePath(meal),
+      imagePath: meal.strMealThumb,
       videoPath: meal.strYoutube,
     };
   }

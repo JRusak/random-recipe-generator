@@ -1,4 +1,21 @@
-<p>recipe works!</p>
-
 <button (click)="getRandomRecipe()">Generate random recipe</button>
-<p>{{ recipe | json }}</p>
+<div class="recipe">
+  <h2>{{ recipe?.name }}</h2>
+
+  <ul>
+    <li *ngIf="recipe?.category">Category: {{ recipe?.category }}</li>
+    <li *ngIf="recipe?.area">Cusine: {{ recipe?.area }}</li>
+  </ul>
+  <a *ngIf="recipe?.videoPath" href="{{ recipe?.videoPath }}" target="_blank"
+    >Video tutorial!</a
+  >
+  <img src="{{ recipe?.imagePath }}" alt="{{ recipe?.name }}" />
+
+  <ul>
+    <li *ngFor="let ingredient of recipe?.ingredients">
+      {{ ingredient.name }}: {{ ingredient.measure }}
+    </li>
+  </ul>
+
+  <p>{{ recipe?.instructions }}</p>
+</div>
