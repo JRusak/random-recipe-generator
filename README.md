@@ -4,7 +4,7 @@ This application is for anyone who is looking for a new recipe to try out. It wi
 
 ## User Stories
 
-- [ ] User can input preferred ingredients or dietary restrictions.
+- [x] User can input preferred ingredients or dietary restrictions.
 - [x] User can click a "Generate Recipe" button to get a random recipe suggestion.
 - [x] User can view the recipe's name, ingredients, instructions, and an image.
 - [x] User can save favorite recipes for future reference.
