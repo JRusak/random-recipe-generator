@@ -1,2 +1,6 @@
-<button (click)="getRandomRecipe()">Generate random recipe</button>
+<div class="button-container">
+  <button class="generate-button" (click)="getRandomRecipe()">
+    Generate random recipe
+  </button>
+</div>
 <app-recipe [recipe]="recipe"></app-recipe>
