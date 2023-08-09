@@ -1,0 +1,10 @@
+<div class="favorite-recipes">
+  <ng-container *ngIf="favouriteRecipes$ | async as favouriteRecipes">
+    <h3 class="section-title">Your Favorite Recipes</h3>
+    <div class="recipe-list">
+      <div *ngFor="let favRecipe of favouriteRecipes">
+        <app-recipe [recipe]="favRecipe"></app-recipe>
+      </div>
+    </div>
+  </ng-container>
+</div>
