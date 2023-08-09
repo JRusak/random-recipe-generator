@@ -1,6 +1,13 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, map, of, switchMap } from 'rxjs';
+import {
+  BehaviorSubject,
+  Observable,
+  forkJoin,
+  map,
+  of,
+  switchMap,
+} from 'rxjs';
 import { environment as env } from 'src/environments/environment.development';
 import { Ingredient } from '../models/Ingredient';
 import { Recipe } from '../models/Recipe';
@@ -114,5 +121,122 @@ ${recipe.instructions}
 Ingredients:
 ${formattedIngredients}
     `;
+  }
+
+  getCategories(): Observable<string[]> {
+    return this.http.get(`${env.API_METHODS_URL}list.php?c=list`).pipe(
+      map((data: any) => data.meals.map((meal: any) => meal.strCategory)),
+      map((categories: string[]) => categories.sort())
+    );
+  }
+
+  getAreas(): Observable<string[]> {
+    return this.http.get(`${env.API_METHODS_URL}list.php?a=list`).pipe(
+      map((data: any) => data.meals.map((meal: any) => meal.strArea)),
+      map((areas: string[]) => areas.sort())
+    );
+  }
+
+  getIngredients(): Observable<string[]> {
+    return this.http.get(`${env.API_METHODS_URL}list.php?i=list`).pipe(
+      map((data: any) => data.meals.map((meal: any) => meal.strIngredient)),
+      map((ingredients: string[]) => ingredients.sort())
+    );
+  }
+
+  private filterByIngredients(
+    meals: Recipe[],
+    ingredients: string[]
+  ): Recipe[] {
+    return meals.filter((meal) =>
+      ingredients.every((ingredient) => {
+        if (!meal.ingredients) {
+          return false;
+        }
+
+        return meal.ingredients.some(
+          (mealIngredient) => mealIngredient.name === ingredient
+        );
+      })
+    );
+  }
+
+  private getFilteredByCategory(category: string): Observable<Recipe[]> {
+    return this.http.get(`${env.API_METHODS_URL}filter.php?c=${category}`).pipe(
+      map((data: any) =>
+        data.meals.map((meal: any) => this.getRecipeById(meal.idMeal))
+      ),
+      switchMap((recipes: Observable<Recipe>[]) => forkJoin(recipes))
+    );
+  }
+
+  private getFilteredByArea(area: string): Observable<Recipe[]> {
+    return this.http.get(`${env.API_METHODS_URL}filter.php?a=${area}`).pipe(
+      map((data: any) =>
+        data.meals.map((meal: any) => this.getRecipeById(meal.idMeal))
+      ),
+      switchMap((recipes: Observable<Recipe>[]) => forkJoin(recipes))
+    );
+  }
+
+  private getFilteredRecipes(
+    category: string,
+    area: string,
+    ingredients: string[]
+  ): Observable<Recipe[]> {
+    if (category) {
+      return this.getFilteredByCategory(category).pipe(
+        map((meals: Recipe[]) => {
+          if (area) {
+            return meals.filter((meal) => meal.area === area);
+          }
+
+          return meals;
+        }),
+        map((meals: Recipe[]) => {
+          if (ingredients.length > 0) {
+            return this.filterByIngredients(meals, ingredients);
+          }
+
+          return meals;
+        })
+      );
+    } else if (area) {
+      return this.getFilteredByArea(area).pipe(
+        map((meals: Recipe[]) => {
+          if (ingredients.length > 0) {
+            return this.filterByIngredients(meals, ingredients);
+          }
+
+          return meals;
+        })
+      );
+    } else {
+      return this.http.get(`${env.API_METHODS_URL}search.php?s=`).pipe(
+        map((data: any) =>
+          data.meals.map((meal: any) => this.parseRecipe(meal))
+        ),
+        map((meals: Recipe[]) => {
+          if (ingredients.length > 0) {
+            return this.filterByIngredients(meals, ingredients);
+          }
+
+          return meals;
+        })
+      );
+    }
+  }
+
+  getRandomRecipeByPreference(
+    category: string,
+    area: string,
+    ingredients: string[]
+  ): Observable<Recipe> {
+    return this.getFilteredRecipes(category, area, ingredients).pipe(
+      map(
+        (filteredMeals: any[]) =>
+          filteredMeals[Math.floor(Math.random() * filteredMeals.length)]
+      )
+    );
   }
 }

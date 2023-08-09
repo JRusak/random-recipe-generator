@@ -1,0 +1,49 @@
+<div class="container">
+  <label for="categoryDropdown">Choose Category:</label>
+  <select id="categoryDropdown" [(ngModel)]="selectedCategory">
+    <option *ngFor="let category of categories$ | async" [value]="category">
+      {{ category }}
+    </option>
+  </select>
+  <button (click)="clearCategory()">Clear</button>
+</div>
+
+<div class="container">
+  <label for="areaDropdown">Choose Cusine:</label>
+  <select id="areaDropdown" [(ngModel)]="selectedArea">
+    <option *ngFor="let area of areas$ | async" [value]="area">
+      {{ area }}
+    </option>
+  </select>
+  <button (click)="clearArea()">Clear</button>
+</div>
+
+<div class="container">
+  <label for="ingredientsDropdown">Choose Ingredient:</label>
+  <select id="ingredientsDropdown" [(ngModel)]="selectedIngredient">
+    <option
+      *ngFor="let ingredient of ingredients$ | async"
+      [value]="ingredient"
+    >
+      {{ ingredient }}
+    </option>
+  </select>
+  <button (click)="addIngredient()">Add Ingredient</button>
+  <button (click)="clearIngredients()">Clear ingredients</button>
+</div>
+
+<div class="container" *ngIf="selectedIngredients.length > 0">
+  <label for="selectedIngredients">Selected Ingredients:</label>
+  <ul>
+    <li *ngFor="let ingredient of selectedIngredients; let i = index">
+      {{ ingredient }} <button (click)="removeIngredient(i)">Remove</button>
+    </li>
+  </ul>
+</div>
+
+<button class="getRandomButton" (click)="getRandomRecipeByPreference()">
+  Get Random Recipe
+</button>
+
+<app-recipe *ngIf="recipe" [recipe]="recipe"></app-recipe>
+<p *ngIf="notFound">Recipe not found. Please try another meal</p>
