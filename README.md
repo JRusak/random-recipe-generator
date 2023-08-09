@@ -11,8 +11,7 @@ This application is for anyone who is looking for a new recipe to try out. It wi
 - [x] User can view a list of recipes they have saved.
 - [x] User can delete recipes from their list of saved recipes.
 - [ ] User can search for recipes by keyword or category.
-- [ ] User can print a recipe for offline use.
-- [ ] User can switch between different measurement units (e.g., metric vs. imperial).
+- [x] User can print a recipe for offline use.
 
 ## Installation
 
