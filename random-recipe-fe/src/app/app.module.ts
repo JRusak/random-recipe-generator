@@ -9,10 +9,20 @@ import { RandomComponent } from './random/random.component';
 import { RandomWithPrefsComponent } from './random-with-prefs/random-with-prefs.component';
 import { FavouritesComponent } from './favourites/favourites.component';
 import { MenuComponent } from './menu/menu.component';
+import { SearchComponent } from './search/search.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
-  declarations: [AppComponent, RecipeComponent, RandomComponent, RandomWithPrefsComponent, FavouritesComponent, MenuComponent],
-  imports: [BrowserModule, AppRoutingModule, HttpClientModule],
+  declarations: [
+    AppComponent,
+    RecipeComponent,
+    RandomComponent,
+    RandomWithPrefsComponent,
+    FavouritesComponent,
+    MenuComponent,
+    SearchComponent,
+  ],
+  imports: [BrowserModule, AppRoutingModule, HttpClientModule, FormsModule],
   providers: [],
   bootstrap: [AppComponent],
 })

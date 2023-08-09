@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { RandomComponent } from './random/random.component';
 import { FavouritesComponent } from './favourites/favourites.component';
+import { SearchComponent } from './search/search.component';
 
 const routes: Routes = [
   {
@@ -17,6 +18,10 @@ const routes: Routes = [
   {
     path: 'favourites',
     component: FavouritesComponent,
+  },
+  {
+    path: 'search',
+    component: SearchComponent,
   },
 ];
 

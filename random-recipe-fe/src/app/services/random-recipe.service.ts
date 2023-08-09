@@ -69,7 +69,12 @@ export class RandomRecipeService {
 
   getRecipeByName(name: string): Observable<Recipe> {
     return this.http.get(`${env.API_METHODS_URL}search.php?s=${name}`).pipe(
-      map((data: any) => data.meals[0]),
+      map((data: any) => {
+        if (!data.meals) {
+          throw new Error('No recipe found');
+        }
+        return data.meals[0];
+      }),
       map((meal: any) => this.parseRecipe(meal))
     );
   }

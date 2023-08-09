@@ -1,0 +1,45 @@
+.center-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  height: 100vh;
+  padding-top: 20px;
+}
+
+.find-recipe {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
+  background-color: #f9f9f9;
+  width: 100%;
+  max-width: 400px;
+}
+
+.find-recipe input,
+.find-recipe button {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.find-recipe button {
+  background-color: #007bff; 
+  color: #fff;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.find-recipe button:hover {
+  background-color: #0056b3;
+}
+
+.app-recipe {
+  margin-top: 20px;
+}
