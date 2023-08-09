@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { RandomRecipeService } from '../services/random-recipe.service';
+import { Observable } from 'rxjs';
+import { Recipe } from '../models/Recipe';
 
 @Component({
   selector: 'app-favourites',
@@ -14,11 +16,13 @@ export class FavouritesComponent {
 
   constructor(private readonly randomRecipeService: RandomRecipeService) {}
 
-  categories$ = this.randomRecipeService.getCategories();
-  areas$ = this.randomRecipeService.getAreas();
-  ingredients$ = this.randomRecipeService.getIngredients();
+  categories$: Observable<string[]> = this.randomRecipeService.getCategories();
+  areas$: Observable<string[]> = this.randomRecipeService.getAreas();
+  ingredients$: Observable<string[]> =
+    this.randomRecipeService.getIngredients();
 
-  favouriteRecipes$ = this.randomRecipeService.getFavourites();
+  favouriteRecipes$: Observable<Recipe[]> =
+    this.randomRecipeService.getFavourites();
 
   filterFavourites(): void {
     this.randomRecipeService.filterFavourites(

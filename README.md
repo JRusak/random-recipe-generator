@@ -2,6 +2,10 @@
 
 This application is for anyone who is looking for a new recipe to try out. It will generate a random recipe for you to try out, based on your preferences. You can also save your favorite recipes for future reference.
 
+## Technologies Used
+
+- Angular
+
 ## User Stories
 
 - [x] User can input preferred ingredients or dietary restrictions.
@@ -10,7 +14,7 @@ This application is for anyone who is looking for a new recipe to try out. It wi
 - [x] User can save favorite recipes for future reference.
 - [x] User can view a list of recipes they have saved.
 - [x] User can delete recipes from their list of saved recipes.
-- [ ] User can search for recipes by keyword or category.
+- [x] User can search for recipes by keyword or category.
 - [x] User can print a recipe for offline use.
 
 ## Installation
