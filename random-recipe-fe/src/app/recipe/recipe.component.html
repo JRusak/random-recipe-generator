@@ -1,6 +1,21 @@
-<button (click)="getRandomRecipe()">Generate random recipe</button>
 <div class="recipe">
   <h2>{{ recipe?.name }}</h2>
+
+  <img
+    *ngIf="isFavourite()"
+    src="../../assets/img/star.png"
+    alt="star"
+    class="star-icon"
+    (click)="removeFromFavourites()"
+  />
+
+  <img
+    *ngIf="!isFavourite()"
+    src="../../assets/img/empty-star.png"
+    alt="empty star"
+    class="star-icon"
+    (click)="addToFavourites()"
+  />
 
   <ul>
     <li *ngIf="recipe?.category">Category: {{ recipe?.category }}</li>
@@ -9,7 +24,11 @@
   <a *ngIf="recipe?.videoPath" href="{{ recipe?.videoPath }}" target="_blank"
     >Video tutorial!</a
   >
-  <img src="{{ recipe?.imagePath }}" alt="{{ recipe?.name }}" />
+  <img
+    src="{{ recipe?.imagePath }}"
+    alt="{{ recipe?.name }}"
+    class="recipe-image"
+  />
 
   <ul>
     <li *ngFor="let ingredient of recipe?.ingredients">

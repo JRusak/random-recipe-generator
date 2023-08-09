@@ -1,35 +1,38 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { RandomRecipeService } from '../services/random-recipe.service';
-import { Subscription } from 'rxjs';
+import { Component, Input } from '@angular/core';
 import { Recipe } from '../models/Recipe';
+import { RandomRecipeService } from '../services/random-recipe.service';
 
 @Component({
   selector: 'app-recipe',
   templateUrl: './recipe.component.html',
   styleUrls: ['./recipe.component.css'],
 })
-export class RecipeComponent implements OnInit, OnDestroy {
+export class RecipeComponent {
+  @Input('recipe') recipe?: Recipe;
+
   constructor(private readonly randomRecipeService: RandomRecipeService) {}
 
-  recipe?: Recipe;
-  sub?: Subscription;
+  addToFavourites(): void {
+    if (!this.recipe) {
+      return;
+    }
 
-  ngOnInit() {
-    this.getRandomRecipe();
+    this.randomRecipeService.addToFavourites(this.recipe);
   }
 
-  getRandomRecipe(): void {
-    const sub = this.randomRecipeService
-      .getRandomRecipe()
-      .subscribe((data: Recipe) => {
-        this.recipe = data;
-      });
+  removeFromFavourites(): void {
+    if (!this.recipe) {
+      return;
+    }
 
-    this.sub?.unsubscribe();
-    this.sub = sub;
+    this.randomRecipeService.removeFromFavourites(this.recipe);
   }
 
-  ngOnDestroy() {
-    this.sub?.unsubscribe();
+  isFavourite(): boolean {
+    if (!this.recipe) {
+      return false;
+    }
+
+    return this.randomRecipeService.isRecipeInFavourites(this.recipe.id);
   }
 }
