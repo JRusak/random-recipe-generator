@@ -4,16 +4,15 @@ This application is for anyone who is looking for a new recipe to try out. It wi
 
 ## User Stories
 
-- User can input preferred ingredients or dietary restrictions.
-- User can click a "Generate Recipe" button to get a random recipe suggestion.
-- User can view the recipe's name, ingredients, instructions, and an image.
-- User can save favorite recipes for future reference.
-- User can view a list of recipes they have saved.
-- User can delete recipes from their list of saved recipes.
-- User can search for recipes by keyword or category.
-- User can filter recipes based on cooking time, difficulty level, or cuisine type.
-- User can print a recipe for offline use.
-- User can switch between different measurement units (e.g., metric vs. imperial).
+- [ ] User can input preferred ingredients or dietary restrictions.
+- [x] User can click a "Generate Recipe" button to get a random recipe suggestion.
+- [x] User can view the recipe's name, ingredients, instructions, and an image.
+- [x] User can save favorite recipes for future reference.
+- [x] User can view a list of recipes they have saved.
+- [x] User can delete recipes from their list of saved recipes.
+- [ ] User can search for recipes by keyword or category.
+- [ ] User can print a recipe for offline use.
+- [ ] User can switch between different measurement units (e.g., metric vs. imperial).
 
 ## Installation
 
