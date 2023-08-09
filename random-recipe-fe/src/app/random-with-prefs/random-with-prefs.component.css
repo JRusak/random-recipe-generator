@@ -22,6 +22,10 @@ button {
   cursor: pointer;
 }
 
+button:hover {
+  background-color: #0056b3;
+}
+
 ul {
   list-style-type: none;
   padding: 0;
@@ -49,4 +53,8 @@ button.getRandomButton {
   background-color: #28a745;
   display: block;
   margin: 0 auto;
+}
+
+button.getRandomButton:hover {
+  background-color: #218838;
 }

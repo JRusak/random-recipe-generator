@@ -1,6 +1,53 @@
 <div class="favorite-recipes">
   <ng-container *ngIf="favouriteRecipes$ | async as favouriteRecipes">
     <h3 class="section-title">Your Favorite Recipes</h3>
+    <div class="container">
+      <label for="categoryDropdown">Filter by Category:</label>
+      <select id="categoryDropdown" [(ngModel)]="selectedCategory">
+        <option *ngFor="let category of categories$ | async" [value]="category">
+          {{ category }}
+        </option>
+      </select>
+      <button (click)="clearCategory()">Clear</button>
+    </div>
+
+    <div class="container">
+      <label for="areaDropdown">Filter by Cusine:</label>
+      <select id="areaDropdown" [(ngModel)]="selectedArea">
+        <option *ngFor="let area of areas$ | async" [value]="area">
+          {{ area }}
+        </option>
+      </select>
+      <button (click)="clearArea()">Clear</button>
+    </div>
+
+    <div class="container">
+      <label for="ingredientsDropdown">Filter by Ingredient:</label>
+      <select id="ingredientsDropdown" [(ngModel)]="selectedIngredient">
+        <option
+          *ngFor="let ingredient of ingredients$ | async"
+          [value]="ingredient"
+        >
+          {{ ingredient }}
+        </option>
+      </select>
+      <button (click)="addIngredient()">Add Ingredient</button>
+      <button (click)="clearIngredients()">Clear ingredients</button>
+    </div>
+
+    <div class="container" *ngIf="selectedIngredients.length > 0">
+      <label for="selectedIngredients">Selected Ingredients:</label>
+      <ul>
+        <li *ngFor="let ingredient of selectedIngredients; let i = index">
+          {{ ingredient }} <button (click)="removeIngredient(i)">Remove</button>
+        </li>
+      </ul>
+    </div>
+
+    <button class="filterButton" (click)="filterFavourites()">
+      Filter Favourites
+    </button>
+
     <div class="recipe-list">
       <div *ngFor="let favRecipe of favouriteRecipes">
         <app-recipe [recipe]="favRecipe"></app-recipe>

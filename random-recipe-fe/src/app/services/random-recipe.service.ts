@@ -22,7 +22,7 @@ export class RandomRecipeService {
 
   private refreshFavourties$ = new BehaviorSubject<Recipe[]>([]);
   private favouriteRecipes$: Observable<Recipe[]> =
-    this.refreshFavourties$.pipe(switchMap((_value) => of(this.favourites)));
+    this.refreshFavourties$.pipe(switchMap((_value) => of(_value)));
 
   private parseIngredients(meal: any): Ingredient[] {
     const ingredients = [];
@@ -68,6 +68,40 @@ export class RandomRecipeService {
     this.favourites = this.favourites.filter((r) => r.id !== recipe.id);
 
     this.refreshFavourties$.next(this.favourites);
+  }
+
+  refreshFavourites(): void {
+    this.refreshFavourties$.next(this.favourites);
+  }
+
+  filterFavourites(
+    category: string,
+    area: string,
+    ingredients: string[]
+  ): void {
+    let filteredFavourites = this.favourites;
+    if (category) {
+      filteredFavourites = filteredFavourites.filter(
+        (recipe) => recipe.category === category
+      );
+    }
+
+    if (area) {
+      filteredFavourites = filteredFavourites.filter(
+        (recipe) => recipe.area === area
+      );
+    }
+
+    if (ingredients.length > 0) {
+      filteredFavourites = this.filterByIngredients(
+        filteredFavourites,
+        ingredients
+      );
+    }
+
+    console.log(filteredFavourites);
+
+    this.refreshFavourties$.next(filteredFavourites);
   }
 
   getFavourites(): Observable<Recipe[]> {
