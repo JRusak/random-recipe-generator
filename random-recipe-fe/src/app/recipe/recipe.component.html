@@ -1,21 +1,25 @@
 <div class="recipe">
   <h2>{{ recipe?.name }}</h2>
 
-  <img
-    *ngIf="isFavourite()"
-    src="../../assets/img/star.png"
-    alt="star"
-    class="star-icon"
-    (click)="removeFromFavourites()"
-  />
+  <div class="button-container">
+    <button class="print-button" (click)="printRecipe()">Print Recipe</button>
 
-  <img
-    *ngIf="!isFavourite()"
-    src="../../assets/img/empty-star.png"
-    alt="empty star"
-    class="star-icon"
-    (click)="addToFavourites()"
-  />
+    <img
+      *ngIf="isFavourite()"
+      src="../../assets/img/star.png"
+      alt="star"
+      class="star-icon"
+      (click)="removeFromFavourites()"
+    />
+
+    <img
+      *ngIf="!isFavourite()"
+      src="../../assets/img/empty-star.png"
+      alt="empty star"
+      class="star-icon"
+      (click)="addToFavourites()"
+    />
+  </div>
 
   <ul>
     <li *ngIf="recipe?.category">Category: {{ recipe?.category }}</li>

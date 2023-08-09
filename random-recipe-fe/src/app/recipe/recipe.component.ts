@@ -35,4 +35,12 @@ export class RecipeComponent {
 
     return this.randomRecipeService.isRecipeInFavourites(this.recipe.id);
   }
+
+  printRecipe(): void {
+    if (!this.recipe) {
+      return;
+    }
+
+    console.log(this.randomRecipeService.formatRecipe(this.recipe));
+  }
 }

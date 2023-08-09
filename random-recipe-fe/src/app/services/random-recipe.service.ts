@@ -89,4 +89,30 @@ export class RandomRecipeService {
   isRecipeInFavourites(id: string): boolean {
     return this.favourites.some((r) => r.id === id);
   }
+
+  private formatIngredients(ingredients: Ingredient[]): string {
+    return ingredients
+      .map(
+        (ingredient, index) =>
+          `${index + 1}. ${ingredient.name} - ${ingredient.measure}`
+      )
+      .join('\n');
+  }
+
+  formatRecipe(recipe: Recipe): string {
+    const formattedIngredients = this.formatIngredients(recipe.ingredients);
+
+    return `
+Name: ${recipe.name}
+
+Category: ${recipe.category}
+Area: ${recipe.area}
+
+Instructions:
+${recipe.instructions}
+
+Ingredients:
+${formattedIngredients}
+    `;
+  }
 }
