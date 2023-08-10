@@ -6,6 +6,10 @@ This application is for anyone who is looking for a new recipe to try out. It wi
 
 - Angular
 
+## Data Sources
+
+- theMealDB API: <https://www.themealdb.com/api.php>
+
 ## User Stories
 
 - [x] User can input preferred ingredients or dietary restrictions.
