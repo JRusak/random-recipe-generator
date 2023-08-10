@@ -145,7 +145,7 @@ export class RandomRecipeService {
 Name: ${recipe.name}
 
 Category: ${recipe.category}
-Area: ${recipe.area}
+Cusine: ${recipe.area}
 
 Instructions:
 ${recipe.instructions}
