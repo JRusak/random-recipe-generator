@@ -47,3 +47,4 @@
 
 <app-recipe *ngIf="recipe" [recipe]="recipe"></app-recipe>
 <p *ngIf="notFound">Recipe not found. Please try another meal</p>
+<p *ngIf="apiError">API error, wait 5 seconds</p>

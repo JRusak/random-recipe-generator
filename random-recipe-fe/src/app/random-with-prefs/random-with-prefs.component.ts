@@ -16,7 +16,8 @@ export class RandomWithPrefsComponent implements OnDestroy {
 
   recipe?: Recipe;
   sub?: Subscription;
-  notFound = false;
+  notFound: boolean = false;
+  apiError: boolean = false;
 
   constructor(private readonly randomRecipeService: RandomRecipeService) {}
 
@@ -58,27 +59,23 @@ export class RandomWithPrefsComponent implements OnDestroy {
         this.selectedArea,
         this.selectedIngredients
       )
-      .pipe(
-        catchError((error: unknown) => {
-          if (error instanceof Error) {
-            console.log('err', error);
+      .subscribe({
+        next: (data: Recipe) => {
+          this.apiError = false;
+          if (!data) {
+            this.recipe = undefined;
+            this.notFound = true;
+            return;
           }
 
+          this.recipe = data;
+          this.notFound = false;
+        },
+        error: () => {
+          this.notFound = false;
+          this.apiError = true;
           this.recipe = undefined;
-          this.notFound = true;
-          return [];
-        })
-      )
-      .subscribe((data: Recipe) => {
-        console.log('data', data);
-        if (!data) {
-          this.recipe = undefined;
-          this.notFound = true;
-          return;
-        }
-
-        this.recipe = data;
-        this.notFound = false;
+        },
       });
 
     this.sub?.unsubscribe();

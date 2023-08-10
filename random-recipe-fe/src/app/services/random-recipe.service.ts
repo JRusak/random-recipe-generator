@@ -52,7 +52,7 @@ export class RandomRecipeService {
   }
 
   getRandomRecipe(): Observable<Recipe> {
-    return this.http.get(`${env.API_METHODS_URL}random.php`).pipe(
+    return this.http.get(`${env.API_URL}random.php`).pipe(
       map((data: any) => data.meals[0]),
       map((meal: any) => this.parseRecipe(meal))
     );
@@ -99,8 +99,6 @@ export class RandomRecipeService {
       );
     }
 
-    console.log(filteredFavourites);
-
     this.refreshFavourties$.next(filteredFavourites);
   }
 
@@ -109,7 +107,7 @@ export class RandomRecipeService {
   }
 
   getRecipeByName(name: string): Observable<Recipe> {
-    return this.http.get(`${env.API_METHODS_URL}search.php?s=${name}`).pipe(
+    return this.http.get(`${env.API_URL}search.php?s=${name}`).pipe(
       map((data: any) => {
         if (!data.meals) {
           throw new Error('No recipe found');
@@ -121,7 +119,7 @@ export class RandomRecipeService {
   }
 
   private getRecipeById(id: string): Observable<Recipe> {
-    return this.http.get(`${env.API_METHODS_URL}lookup.php?i=${id}`).pipe(
+    return this.http.get(`${env.API_URL}lookup.php?i=${id}`).pipe(
       map((data: any) => data.meals[0]),
       map((meal: any) => this.parseRecipe(meal))
     );
@@ -158,21 +156,21 @@ ${formattedIngredients}
   }
 
   getCategories(): Observable<string[]> {
-    return this.http.get(`${env.API_METHODS_URL}list.php?c=list`).pipe(
+    return this.http.get(`${env.API_URL}list.php?c=list`).pipe(
       map((data: any) => data.meals.map((meal: any) => meal.strCategory)),
       map((categories: string[]) => categories.sort())
     );
   }
 
   getAreas(): Observable<string[]> {
-    return this.http.get(`${env.API_METHODS_URL}list.php?a=list`).pipe(
+    return this.http.get(`${env.API_URL}list.php?a=list`).pipe(
       map((data: any) => data.meals.map((meal: any) => meal.strArea)),
       map((areas: string[]) => areas.sort())
     );
   }
 
   getIngredients(): Observable<string[]> {
-    return this.http.get(`${env.API_METHODS_URL}list.php?i=list`).pipe(
+    return this.http.get(`${env.API_URL}list.php?i=list`).pipe(
       map((data: any) => data.meals.map((meal: any) => meal.strIngredient)),
       map((ingredients: string[]) => ingredients.sort())
     );
@@ -196,7 +194,7 @@ ${formattedIngredients}
   }
 
   private getFilteredByCategory(category: string): Observable<Recipe[]> {
-    return this.http.get(`${env.API_METHODS_URL}filter.php?c=${category}`).pipe(
+    return this.http.get(`${env.API_URL}filter.php?c=${category}`).pipe(
       map((data: any) =>
         data.meals.map((meal: any) => this.getRecipeById(meal.idMeal))
       ),
@@ -205,7 +203,7 @@ ${formattedIngredients}
   }
 
   private getFilteredByArea(area: string): Observable<Recipe[]> {
-    return this.http.get(`${env.API_METHODS_URL}filter.php?a=${area}`).pipe(
+    return this.http.get(`${env.API_URL}filter.php?a=${area}`).pipe(
       map((data: any) =>
         data.meals.map((meal: any) => this.getRecipeById(meal.idMeal))
       ),
@@ -246,7 +244,7 @@ ${formattedIngredients}
         })
       );
     } else {
-      return this.http.get(`${env.API_METHODS_URL}search.php?s=`).pipe(
+      return this.http.get(`${env.API_URL}search.php?s=`).pipe(
         map((data: any) =>
           data.meals.map((meal: any) => this.parseRecipe(meal))
         ),
